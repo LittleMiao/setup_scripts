@@ -11,18 +11,19 @@
 # ~/.bashrc file, e.g (renaming the path to specified WORKSPACE_PATH):     #
 #                                                                          #
 #     source $HOME/gazebo_dart_ws/devel/setup.bash                         #
-#
-# Check that it worked by running:
-#
-#     $ which gazebo
-#
-# It should point to the version in the devel path of the catkin
-# workspace created by this script. You can then try:
-#
-#     $ gazebo -e dart
-#
-# You should see a Gazebo GUI pop up. In the left-side panel, click
-# 'Physics
+#                                                                          #
+# Check that it worked by running:                                         #
+#                                                                          #
+#     $ which gazebo                                                       #
+#                                                                          #
+# It should point to the version in the devel path of the catkin           #
+# workspace created by this script. You can then try:                      #
+#                                                                          #
+#     $ gazebo -e dart                                                     #
+#                                                                          #
+# You should see a Gazebo GUI pop up. In the top of the left-side panel,   #
+# click 'Physics' and look at the subpanel below. The 'physics engine'     #
+# attribute should say DART.                                               #
 #                                                                          #
 ############################################################################
 
@@ -108,3 +109,5 @@ fi
 cd ${WORKSPACE_PATH}
 catkin init
 catkin build
+
+source ${WORKSPACE_PATH}/devel/setup.bash
