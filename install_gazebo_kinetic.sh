@@ -11,40 +11,55 @@
 # ~/.bashrc file, e.g (renaming the path to specified WORKSPACE_PATH):     #
 #                                                                          #
 #     source $HOME/gazebo_dart_ws/devel/setup.bash                         #
+#
+# Check that it worked by running:
+#
+#     $ which gazebo
+#
+# It should point to the version in the devel path of the catkin
+# workspace created by this script. You can then try:
+#
+#     $ gazebo -e dart
+#
+# You should see a Gazebo GUI pop up. In the left-side panel, click
+# 'Physics
 #                                                                          #
 ############################################################################
 
 INSTALL_GAZEBO=true         # Install Gazebo8 from source
 INSTALL_GAZEBO_ROS=true     # Install gazebo_ros_pkgs from source
-INSTALL_DART=true           # Install Dart5 from source (will allow DART physics engine in Gazebo)
-INSTALL_DART_OPTIONAL=true  # Install optional Dart dependencies with apt (e.g. optimization packages)
+INSTALL_DART=true           # Install Dart5 from source (Gazebo+DART physics)
+INSTALL_DART_OPTIONAL=true  # Install optional Dart dependencies with apt
 INSTALL_DEPENDENCIES=true   # Install dependencies with apt (recommended)
 
-# Set this variable to the path location where you want the catkin workspace created:
+# Set the path location where you want the catkin workspace created:
 WORKSPACE_PATH="$HOME/gazebo_dart_ws"
 
 
 # You shouldn't need to edit below this line
-#====================================================================================================#
+#===============================================================================#
 
 
 
+#-------------------------------------------------------------------------------#
+# Create the catkin workspace (or bail if it already exists)                    #
+#-------------------------------------------------------------------------------#
 if [ -d "$WORKSPACE_PATH" ] ; then
-    echo -e "\nThe directory '$WORKSPACE_PATH' already exists. Exiting.\n"
+    echo -e "\nThe directory $WORKSPACE_PATH already exists. Exiting.\n"
     exit 1
 fi
-
 
 mkdir -p ${WORKSPACE_PATH}/src
 cd ${WORKSPACE_PATH}/src
 
 
-# Install dependencies only for the packages specified to be installed
+#-------------------------------------------------------------------------------#
+# Install dependencies only for the packages specified to be installed          #
+#-------------------------------------------------------------------------------#
 if [ "$INSTALL_DEPENDENCIES" = true ] ; then
     
     PACKAGES=""
 
-    # Install dependencies for DART 5
     if [ "$INSTALL_DART" = true ] ; then
 	PACKAGES+=" build-essential cmake pkg-config git"
 	PACKAGES+=" libeigen3-dev libassimp-dev libccd-dev libfcl-0.5-dev"
@@ -56,46 +71,40 @@ if [ "$INSTALL_DEPENDENCIES" = true ] ; then
 	    PACKAGES+=" libbullet-dev libnlopt-dev coinor-libipopt-dev"
 	fi
     fi
-
-    # Install dependencies for Gazebo 8
     if [ "$INSTALL_GAZEBO" = true ] ; then
 	PACKAGES+=" libtar-dev libfreeimage-dev libignition-math3-dev"
 	PACKAGES+=" libignition-transport3-dev protobuf-compiler libprotoc-dev"
 	PACKAGES+=" libtbb-dev libsdformat5-dev freeglut3-dev libxmu-dev libxi-dev"
 	PACKAGES+=" libqwt-qt5-dev libignition-msgs0-dev libtinyxml2-dev"
     fi
-
-    # Install dependences for gazebo_ros_pkgs
     if [ "$INSTALL_GAZEBO_ROS" = true ] ; then
 	PACKAGES+=" ros-kinetic-perception ros-kinetic-ros-control ros-kinetic-ros-controllers"
     fi
     
     sudo apt update
     sudo apt install $PACKAGES
-
 fi
 
 
-# Clone the repositories at the necessary branches
+#-------------------------------------------------------------------------------#
+# Clone the repositories at the necessary branches                              #
+#-------------------------------------------------------------------------------#
 if [ "$INSTALL_DART" = true ] ; then
     git clone https://github.com/dartsim/dart.git -b release-5.1
 fi
-
 if [ "$INSTALL_GAZEBO" = true ] ; then
     hg clone https://bitbucket.org/osrf/gazebo -r gazebo8
     URL_PREFIX="https://raw.githubusercontent.com/adamconkey/setup_scripts/master/package_xml/"
     curl ${URL_PREFIX}gazebo_package.xml > ${WORKSPACE_PATH}/src/gazebo/package.xml
 fi
-
 if [ "$INSTALL_GAZEBO_ROS" = true ] ; then
     git clone https://github.com/ros-simulation/gazebo_ros_pkgs.git -b kinetic-devel
 fi
 
 
-# Initialize the catkin workspace and run the build
+#-------------------------------------------------------------------------------#
+# Initialize the catkin workspace and run the build                             #
+#-------------------------------------------------------------------------------#
 cd ${WORKSPACE_PATH}
 catkin init
 catkin build
-
-
-# TODO will consider adding build FCL from source
