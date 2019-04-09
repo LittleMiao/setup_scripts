@@ -1,0 +1,34 @@
+<package>
+
+  <!-- NOTE: This is a catkin package.xml file to support optional building in
+       a catkin workspace, but is not required to build sdformat. For more
+       information, see: http://ros.org/reps/rep-0134.html -->
+
+  <name>ign_tools</name>
+  <version>0.0.0</version>
+  <description>
+    Ignition tools is a component in the ignition framework, a set of
+    libraries designed to rapidly develop robot applications.
+    The library provides command-line tools for interfacing
+    with other ignition libraries.
+  </description>
+  <license>Apache2</license>
+  <author>Open Source Robotics Foundation</author>
+
+  <maintainer email="nate@osrfoundation.org">Nate Koenig</maintainer>
+
+  <url>http://ignitionrobotics.org</url>
+
+        <run_depend>catkin</run_depend>
+
+  <buildtool_depend>cmake</buildtool_depend>
+  <buildtool_depend>pkg-config</buildtool_depend>
+
+  <buildtool_depend>ruby</buildtool_depend>
+        <run_depend>ruby</run_depend>
+
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+
+</package>

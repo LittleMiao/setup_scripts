@@ -1,31 +1,33 @@
 #!/usr/bin/env bash
-############################################################################
-#                                                                          #
-# This script builds Gazebo8 with ROS integration and DART5 from source    #
-# using catkin. Set the options below to specify which components should   # 
-# be installed and whether or not you want to try to install dependencies. #
-#                                                                          #
-# A catkin workspace will be created in the path WORKSPACE_PATH specified  #
-# below. The script will pull the repositories and build the code. Once it #
-# is finished running, you can source the setup.bash and/or add it to your #
-# ~/.bashrc file, e.g (renaming the path to specified WORKSPACE_PATH):     #
-#                                                                          #
-#     source $HOME/gazebo_dart_ws/devel/setup.bash                         #
-#                                                                          #
-# Check that it worked by running:                                         #
-#                                                                          #
-#     $ which gazebo                                                       #
-#                                                                          #
-# It should point to the version in the devel path of the catkin           #
-# workspace created by this script. You can then try:                      #
-#                                                                          #
-#     $ gazebo -e dart                                                     #
-#                                                                          #
-# You should see a Gazebo GUI pop up. In the top of the left-side panel,   #
-# click 'Physics' and look at the subpanel below. The 'physics engine'     #
-# attribute should say DART.                                               #
-#                                                                          #
-############################################################################
+#####################################################################
+#                                                                   #
+# This script builds Gazebo8 with ROS integration and DART5 from    #
+# source using catkin. Set the options below to specify which       #
+# components should be installed and whether or not you want to try #
+# to install dependencies.                                          # 
+#                                                                   #
+# A catkin workspace will be created in the path WORKSPACE_PATH     #
+# specified below. The script will pull the repositories and build  #
+# the code. Once it is finished running, you can source the         #
+# setup.bash and/or add it to your ~/.bashrc file, e.g (renaming    #
+# the path to specified WORKSPACE_PATH):                            #
+#                                                                   #
+#     source $HOME/gazebo_dart_ws/devel/setup.bash                  #
+#								    #
+# Check that it worked by running:				    #
+#								    #
+#     $ which gazebo						    #
+#								    #
+# It should point to the version in the devel path of the catkin    #
+# workspace created by this script. You can then try:		    #
+#								    #
+#     $ gazebo -e dart                                              # 
+#                                                                   #
+# You should see a Gazebo GUI pop up. In the top of the left-side   #
+# panel, click 'Physics' and look at the subpanel below. The	    #
+# 'physics engine' attribute should say DART.                       #  
+#                                                                   #
+#####################################################################
 
 INSTALL_GAZEBO=true         # Install Gazebo8 from source
 INSTALL_GAZEBO_ROS=true     # Install gazebo_ros_pkgs from source
@@ -38,13 +40,13 @@ WORKSPACE_PATH="$HOME/gazebo_dart_ws"
 
 
 # You shouldn't need to edit below this line
-#===============================================================================#
+#===================================================================#
 
 
 
-#-------------------------------------------------------------------------------#
-# Create the catkin workspace (or bail if it already exists)                    #
-#-------------------------------------------------------------------------------#
+#-------------------------------------------------------------------#
+# Create the catkin workspace (or bail if it already exists)        #
+#-------------------------------------------------------------------#
 if [ -d "$WORKSPACE_PATH" ] ; then
     echo -e "\nThe directory $WORKSPACE_PATH already exists. Exiting.\n"
     exit 1
@@ -54,9 +56,9 @@ mkdir -p ${WORKSPACE_PATH}/src
 cd ${WORKSPACE_PATH}/src
 
 
-#-------------------------------------------------------------------------------#
-# Install dependencies only for the packages specified to be installed          #
-#-------------------------------------------------------------------------------#
+#------------------------------------------------------------------#
+# Install dependencies for the packages specified to be installed  #
+#------------------------------------------------------------------#
 if [ "$INSTALL_DEPENDENCIES" = true ] ; then
     
     PACKAGES="python-catkin-tools"
@@ -87,9 +89,9 @@ if [ "$INSTALL_DEPENDENCIES" = true ] ; then
 fi
 
 
-#-------------------------------------------------------------------------------#
-# Clone the repositories at the necessary branches                              #
-#-------------------------------------------------------------------------------#
+#-----------------------------------------------------------------#
+# Clone the repositories at the necessary branches                #
+#-----------------------------------------------------------------#
 if [ "$INSTALL_DART" = true ] ; then
     git clone https://github.com/dartsim/dart.git -b release-5.1
 fi
@@ -103,9 +105,9 @@ if [ "$INSTALL_GAZEBO_ROS" = true ] ; then
 fi
 
 
-#-------------------------------------------------------------------------------#
-# Initialize the catkin workspace and run the build                             #
-#-------------------------------------------------------------------------------#
+#-----------------------------------------------------------------#
+# Initialize the catkin workspace and run the build               #
+#-----------------------------------------------------------------#
 cd ${WORKSPACE_PATH}
 catkin init
 catkin build
