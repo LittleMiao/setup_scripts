@@ -59,7 +59,7 @@ cd ${WORKSPACE_PATH}/src
 #-------------------------------------------------------------------------------#
 if [ "$INSTALL_DEPENDENCIES" = true ] ; then
     
-    PACKAGES=""
+    PACKAGES="python-catkin-tools"
 
     if [ "$INSTALL_DART" = true ] ; then
 	PACKAGES+=" build-essential cmake pkg-config git"
