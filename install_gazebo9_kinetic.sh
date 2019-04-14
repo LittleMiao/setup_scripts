@@ -1,20 +1,24 @@
 #!/usr/bin/env bash
 #===================================================================#
-# This script installs Gazebo9 from source into a catkin workspace.
-# By default it will also install DART from source in the same
-# catkin workspace to enable Gazebo+DART physics engine. You can
-# configure the installation by setting the boolean options below,
-# as well as defining the where the workspace will be created.
-#
-# It is recommended that you keep this workspace isolated, and
-# extend it in your other workspaces. For example, you can config
-# your other workspaces with the following command (assuming you
-# adopted the default workspace name provided by this script):
-#
-#     catkin config --extend $HOME/gazebo9_ws
-#
-# Once you explicitly extend in a workspace you should do a clean
-# build of it.
+# This script installs Gazebo9 from source into a catkin workspace. #
+# By default it will also install DART from source in the same	    #
+# catkin workspace to enable Gazebo+DART physics engine. You can    #
+# configure the installation by setting the boolean options below,  #
+# as well as defining the where the workspace will be created.	    #
+#								    #
+# It is recommended that you keep this workspace isolated, and	    #
+# extend it in your other workspaces. For example, you can config   #
+# your other workspaces with the following command (assuming you    #
+# adopted the default workspace name provided by this script):	    #
+#								    #
+#     catkin config --extend $HOME/gazebo9_ws			    #
+#								    #
+# Once you explicitly extend in a workspace you should do a clean   #
+# build of it.                                                      #
+#-------------------------------------------------------------------#
+# Runtime:                                                          #
+#   - 4-physical-core i7 4.2GHz with 32GB RAM: ~20 minutes          #
+#   - 2-physical-core i5 1.8GHz with 8GB RAM: ~1 hour 15 minutes    #
 #===================================================================#
 
 
