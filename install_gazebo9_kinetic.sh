@@ -25,6 +25,7 @@
 INSTALL_DEPENDENCIES=true  # Install apt dependencies (recommended)
 INSTALL_DART=true          # Install DART from source
 INSTALL_DART_OPTIONAL=true # Install optional DART dependencies
+INSTALL_ROS=false          # Install ROS Kinetic (apt)
 
 # Set the path location where you want the catkin workspace created:
 WORKSPACE_PATH="$HOME/gazebo9_ws"
@@ -58,7 +59,11 @@ if [ "$INSTALL_DEPENDENCIES" = true ] ; then
     wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
     
     # Populate packages needed by each component
-    PACKAGES="mercurial python-catkin-tools curl ros-kinetic-desktop"
+    PACKAGES="mercurial python-catkin-tools curl"
+
+    if [ "$INSTALL_ROS" = true ] ; then
+	PACKAGES+=" ros-kinetic-desktop"
+    fi
     
     # DART dependencies
     if [ "$INSTALL_DART" = true ] ; then
