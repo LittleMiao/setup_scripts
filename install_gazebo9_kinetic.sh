@@ -97,7 +97,7 @@ fi
 # Clone the repositories at the necessary branches                  #
 #-------------------------------------------------------------------#
 if [ "$INSTALL_DART" = true ] ; then
-    git clone https://github.com/dartsim/dart.git -b release-6.7
+    git clone https://github.com/dartsim/dart.git -b release-6.9
 fi
 git clone https://github.com/ros-simulation/gazebo_ros_pkgs.git -b kinetic-devel
 hg clone https://bitbucket.org/osrf/gazebo
